@@ -1,0 +1,22 @@
+.hero {
+  border: 1px solid #d7deea;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background: #ffffff;
+  margin-top: 1.5rem;
+}
+
+ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.5rem;
+}
+
+li {
+  list-style: disc;
+  padding: 0.25rem 0;
+}
+
+button {
+  width: fit-content;
+  margin-top: 0.75rem;
+}

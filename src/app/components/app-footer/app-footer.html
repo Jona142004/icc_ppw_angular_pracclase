@@ -1,0 +1,24 @@
+<footer class="footer">
+  <h3>Footer del Proyecto</h3>
+
+  <!-- Pipe 1: uppercase -->
+  <p><strong>Autor:</strong> {{ autor() | uppercase }}</p>
+
+  <!-- Pipe 2: titlecase -->
+  <p><strong>Curso:</strong> {{ curso() | titlecase }}</p>
+
+  <!-- Pipe 3: date -->
+  <p><strong>Fecha:</strong> {{ fechaActual() | date:'fullDate' }}</p>
+
+  <!-- Pipe 4: number -->
+  <p><strong>Versión:</strong> {{ version() | number:'1.2-2' }}</p>
+
+  <!-- Pipe 5: currency (o también puedes usar percent o json) -->
+  <p><strong>Visitas:</strong> {{ visitas() | number }}</p>
+
+  <!-- Pipe extra: lowercase -->
+  <p><strong>Mensaje:</strong> {{ mensaje() | lowercase }}</p>
+
+  <hr />
+  <small>© {{ anioActual() }} - Todos los derechos reservados</small>
+</footer>
