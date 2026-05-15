@@ -1,13 +1,19 @@
-<h2>
-    DETALLE DEL ESTUDIANTE 
-</h2>
-<section>
-    <h3>
-        Información del Estudiante
-    </h3>
-    <p>
-        ID recibido por la ruta: <strong>{{ id }}</strong>
-    </p>
-    <a [routerLink]="['/students']">
-        Volver a la lista de estudiantesd
-    </a>
+<section class="detail-page">
+  <h1 class="detail-page__title">Detalle del estudiante</h1>
+
+  <!--
+    id es una propiedad de la clase, leída con ActivatedRoute.
+    {{ id }} muestra el valor del parámetro :id de la URL.
+  -->
+  <p class="detail-page__id">
+    ID recibido por la ruta: <strong>{{ id }}</strong>
+  </p>
+
+  <!--
+    routerLink="/students" → enlace de retorno al listado.
+    No recarga la página: Angular intercepta el clic y navega internamente.
+  -->
+  <a class="btn-back" routerLink="/students">
+    ← Volver al listado
+  </a>
+</section>

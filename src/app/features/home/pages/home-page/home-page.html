@@ -1,6 +1,17 @@
-<h1 >HOME PAGE
-    
-</h1>
-<app-hero> 
+<section class="home-page">
 
-</app-hero>
+  <!-- Componente hero reutilizado del módulo 02 -->
+  <app-hero />
+
+  <!-- Contenedor de acciones de la página -->
+  <div class="home-page__actions">
+    <!--
+      (click) → event binding: cuando el usuario hace clic,
+      Angular llama al método goToStudentsPage() del componente.
+    -->
+    <button class="btn-primary" (click)="goToStudentsPage()">
+      Ver Estudiantes →
+    </button>
+  </div>
+
+</section>
