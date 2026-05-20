@@ -1,27 +1,53 @@
-<section class="students-page">
-  <h1 class="students-page__title">Estudiantes</h1>
-  <p class="students-page__subtitle">Selecciona un estudiante para ver su detalle.</p>
+<!--
+  space-y-4: ritmo vertical de 1rem entre los elementos de la sección.
+-->
+<section class="space-y-4">
 
-  <ul class="students-list">
+  <!--
+    text-3xl       → font-size: 1.875rem
+    font-bold      → font-weight: 700
+    tracking-tight → letter-spacing ligeramente negativo (mejora legibilidad en títulos grandes)
+    text-slate-900 → color casi negro (#0f172a)
+  -->
+  <h1 class="text-3xl font-bold tracking-tight text-slate-900">Estudiantes</h1>
 
-    <!--
-      @for itera el signal students().
-      track student.id: usa el ID como clave única para optimizar el DOM.
-    -->
+  <!--
+    text-slate-600: gris medio con contraste suficiente sin competir con el título.
+  -->
+  <p class="text-slate-600">Selecciona un estudiante para ver su detalle.</p>
+
+  <!--
+    flex flex-col gap-3: apila los ítems verticalmente con 0.75rem de separación.
+    list-none p-0: elimina bullets y padding por defecto del <ul>.
+  -->
+  <ul class="flex flex-col gap-3 list-none p-0">
+
     @for (student of students(); track student.id) {
-      <li class="students-list__item">
+      <li>
         <!--
-          [routerLink]="['/students', student.id]" → property binding con array.
-          Angular concatena los segmentos: produce /students/1, /students/2, etc.
+          block          → toda el área del ítem es zona de clic
+          px-4 py-3      → padding horizontal 1rem, vertical 0.75rem
+          bg-white       → fondo blanco
+          border border-slate-200 → borde 1px sólido gris claro
+          rounded-lg     → border-radius: 0.5rem
+          text-brand     → color del token de marca (azul)
+          no-underline   → quita el subrayado por defecto del enlace
+          transition     → activa animación en todas las propiedades que cambian
+          hover:bg-slate-50  → fondo muy claro al pasar el cursor
+          hover:border-brand → borde en color de marca en hover
         -->
-        <a [routerLink]="['/students', student.id]">
+        <a
+          class="block px-4 py-3 bg-white border border-slate-200 rounded-lg text-brand no-underline font-medium transition hover:bg-slate-50 hover:border-brand"
+          [routerLink]="['/students', student.id]"
+        >
           {{ student.name }}
         </a>
       </li>
-
     } @empty {
-      <!-- Se renderiza automáticamente cuando students() tiene longitud 0 -->
-      <li class="students-empty">No hay estudiantes disponibles.</li>
+      <!--
+        italic text-slate-500: distingue el estado vacío del contenido real.
+      -->
+      <li class="italic text-slate-500">No hay estudiantes disponibles.</li>
     }
 
   </ul>

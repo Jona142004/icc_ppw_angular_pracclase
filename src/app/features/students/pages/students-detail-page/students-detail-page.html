@@ -1,19 +1,38 @@
-<section class="detail-page">
-  <h1 class="detail-page__title">Detalle del estudiante</h1>
+<!--
+  flex flex-col: disposición vertical.
+  gap-5: espacio de 1.25rem entre los elementos (reemplaza gap: 1.25rem).
+-->
+<section class="flex flex-col gap-5">
+
+  <h1 class="text-3xl font-bold tracking-tight text-slate-900">Detalle del estudiante</h1>
 
   <!--
-    id es una propiedad de la clase, leída con ActivatedRoute.
-    {{ id }} muestra el valor del parámetro :id de la URL.
+    bg-white          → fondo blanco de la caja
+    px-4 py-3         → padding interno
+    rounded-lg        → bordes redondeados
+    border border-slate-200 → borde exterior sutil
+    border-l-4        → borde izquierdo de 4px (el acento visual)
+    border-l-brand    → color del acento = token de marca
+    text-slate-900    → texto oscuro
   -->
-  <p class="detail-page__id">
+  <p class="bg-white px-4 py-3 rounded-lg border border-slate-200 border-l-4 border-l-brand text-slate-900">
     ID recibido por la ruta: <strong>{{ id }}</strong>
   </p>
 
   <!--
-    routerLink="/students" → enlace de retorno al listado.
-    No recarga la página: Angular intercepta el clic y navega internamente.
+    inline-block w-fit → el enlace no ocupa todo el ancho (reemplaza width:fit-content)
+    border-2 border-brand → borde outline de 2px con color de marca
+    text-brand        → texto del mismo color que el borde
+    px-5 py-2         → padding interno del botón
+    rounded-md        → border-radius de 0.375rem
+    no-underline      → quita el subrayado del <a>
+    hover:bg-brand hover:text-white → "fill effect": el fondo se rellena al hacer hover
   -->
-  <a class="btn-back" routerLink="/students">
+  <a
+    class="inline-block w-fit border-2 border-brand text-brand px-5 py-2 rounded-md no-underline font-medium transition hover:bg-brand hover:text-white"
+    routerLink="/students"
+  >
     ← Volver al listado
   </a>
+
 </section>

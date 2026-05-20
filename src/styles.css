@@ -1,9 +1,14 @@
-:root {
-    font-family: INTER,system-ui, sans-serif;
-    color: black;
-    background-color: aliceblue;
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #0f4c81;
+  --color-brand-strong: #0b3a66;
+  --breakpoint-xs: 30rem;
+  --breakpoint-3xl: 120rem;
 }
-body {
-    margin: 0;
-  
+
+@layer base {
+  body {
+    @apply bg-slate-100 text-slate-900 antialiased;
+  }
 }

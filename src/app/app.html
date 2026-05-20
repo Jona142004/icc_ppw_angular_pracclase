@@ -1,8 +1,33 @@
-<app-header></app-header>
-<main class="app-shell">
-  
+<!--
+  flex            → display: flex
+  min-h-screen    → min-height: 100vh
+  flex-col        → flex-direction: column
+  bg-slate-100    → fondo gris claro usando la paleta slate de Tailwind
 
-  <router-outlet></router-outlet>
-  
-</main>
-<app-footer></app-footer>
+  Este contenedor principal permite:
+  - mantener el footer abajo cuando hay poco contenido
+  - hacer crecer el main automáticamente
+  - distribuir header, contenido y footer verticalmente
+-->
+<div class="flex min-h-screen flex-col bg-slate-100">
+
+  <app-header />
+
+  <!--
+    flex-1       → flex: 1 (ocupa el espacio restante entre header y footer)
+    mx-auto      → margin-left/right: auto (centra horizontalmente)
+    w-full       → width: 100%
+    max-w-5xl    → ancho máximo responsive (~1024px)
+    px-6         → padding horizontal: 1.5rem
+    py-8         → padding vertical: 2rem
+
+    Este main contiene el router-outlet y limita el ancho del contenido
+    para mejorar la legibilidad en pantallas grandes.
+  -->
+  <main class="flex-1 mx-auto w-full max-w-5xl px-6 py-8">
+    <router-outlet />
+  </main>
+
+  <app-footer />
+
+</div>
