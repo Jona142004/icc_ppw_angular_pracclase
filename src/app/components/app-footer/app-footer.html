@@ -1,24 +1,22 @@
-<footer class="footer">
-  <h3>Footer del Proyecto</h3>
+<footer class="footer sm:footer-horizontal mt-10 border border-base-200 bg-base-300 p-10 text-base-content shadow-sm">
+  <nav>
+    <h6 class="footer-title">PPW</h6>
+    <a class="link link-hover">Angular 21</a>
+    <a class="link link-hover">TailwindCSS</a>
+    <a class="link link-hover">DaisyUI</a>
+  </nav>
 
-  <!-- Pipe 1: uppercase -->
-  <p><strong>Autor:</strong> {{ autor() | uppercase }}</p>
+  <nav>
+    <h6 class="footer-title">Navegación</h6>
+    <a class="link link-hover" routerLink="/">Inicio</a>
+    <a class="link link-hover" routerLink="/students">Estudiantes</a>
+    <a class="link link-hover" routerLink="/ui-components">Componentes</a>
+  </nav>
 
-  <!-- Pipe 2: titlecase -->
-  <p><strong>Curso:</strong> {{ curso() | titlecase }}</p>
-
-  <!-- Pipe 3: date -->
-  <p><strong>Fecha:</strong> {{ fechaActual() | date:'fullDate' }}</p>
-
-  <!-- Pipe 4: number -->
-  <p><strong>Versión:</strong> {{ version() | number:'1.2-2' }}</p>
-
-  <!-- Pipe 5: currency (o también puedes usar percent o json) -->
-  <p><strong>Visitas:</strong> {{ visitas() | number }}</p>
-
-  <!-- Pipe extra: lowercase -->
-  <p><strong>Mensaje:</strong> {{ mensaje() | lowercase }}</p>
-
-  <hr />
-  <small>© {{ anioActual() }} - Todos los derechos reservados</small>
+  <nav>
+    <h6 class="footer-title">Curso</h6>
+    <a class="link link-hover">Layouts responsive</a>
+    <a class="link link-hover">Formularios</a>
+    <a class="link link-hover">Servicios HTTP</a>
+  </nav>
 </footer>

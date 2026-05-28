@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
 @theme {
   --color-brand: #0f4c81;
@@ -10,5 +11,18 @@
 @layer base {
   body {
     @apply bg-slate-100 text-slate-900 antialiased;
+  }
+}
+
+@layer utilities {
+  .glass-surface {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+  }
+
+  .gradient-surface {
+    background: linear-gradient(135deg, #0f4c81 0%, #0ea5e9 100%);
+    color: white;
   }
 }

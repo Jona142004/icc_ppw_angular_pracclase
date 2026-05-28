@@ -1,21 +1,185 @@
-<section class="hero">
-  <h2>{{ title() | uppercase }}</h2>
-  <p>{{ subtitle() }}</p>
+<!--
+  Dashboard tipo "DevPortfolio".
+  NOTA: las barras de lenguajes y las cards de proyectos usan datos de EJEMPLO
+  (no provienen de tu repo real). Cámbialos en app-hero.ts.
+-->
+<div class="dashboard-shell">
 
-  <button type="button" (click)="toggleMode()">Vista: {{ viewMode() }}</button>
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="sidebar-profile">
+      <div class="avatar-box">{{ initials() }}</div>
+      <div>
+        <div class="profile-name">{{ displayName() }}</div>
+        <div class="profile-role">{{ role() }}</div>
+      </div>
+    </div>
 
-  @switch (viewMode()) {
-    @case ('lista') {
-      <ul>
-        @for (item of topics(); track item) {
-          <li>{{ item }}</li>
-        } @empty {
-          <p>No hay temas registrados.</p>
+    <nav class="sidebar-nav">
+      @for (item of navItems(); track item.label) {
+        <button
+          type="button"
+          class="nav-item"
+          [class.nav-active]="item.label === activeNav()"
+          (click)="activeNav.set(item.label)"
+        >
+          <span class="nav-icon">{{ item.icon }}</span>
+          <span>{{ item.label }}</span>
+        </button>
+      }
+    </nav>
+
+    <a
+      [href]="contactUrl()"
+      class="contact-btn"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Contáctame
+    </a>
+
+    <div class="sidebar-footer">
+      <button type="button" class="nav-item">
+        <span class="nav-icon">⚙️</span><span>Ajustes</span>
+      </button>
+      <button type="button" class="nav-item">
+        <span class="nav-icon">❔</span><span>Soporte</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <div class="main-area">
+
+    <!-- Header -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="brand-mark">{{ brand() }}</span>
+        <nav class="topbar-tabs">
+          @for (tab of tabs(); track tab) {
+            <button
+              type="button"
+              class="tab"
+              [class.tab-active]="tab === activeTab()"
+              (click)="activeTab.set(tab)"
+            >{{ tab }}</button>
+          }
+        </nav>
+      </div>
+
+      <div class="topbar-right">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="Buscar repositorios..." />
+        </div>
+        <a [href]="githubUrl()" target="_blank" rel="noopener noreferrer" class="resume-btn">
+          Ver GitHub
+        </a>
+      </div>
+    </header>
+
+    <!-- Scrollable content -->
+    <main class="content">
+
+      <!-- Banner -->
+      <section class="banner glass-surface">
+        <div class="banner-info">
+          <span class="badge-available">
+            <span class="dot"></span> Disponible para proyectos
+          </span>
+          <h1 class="banner-name">{{ displayName() }}</h1>
+          <p class="banner-tagline">{{ tagline() }}</p>
+        </div>
+        <div class="banner-stats">
+          <div class="pill-stat">
+            <span class="pill-icon">★</span>
+            <span>{{ totalStars() }} Stars</span>
+          </div>
+          <div class="pill-stat">
+            <span class="pill-icon">⑂</span>
+            <span>{{ totalForks() }} Forks</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stat cards + languages -->
+      <section class="stats-row">
+        @for (stat of topStats(); track stat.label) {
+          <div class="stat-card glass-surface">
+            <p class="stat-label">{{ stat.label }}</p>
+            <p class="stat-value" [style.color]="stat.color">{{ stat.value }}</p>
+            <p class="stat-note">{{ stat.note }}</p>
+          </div>
         }
-      </ul>
-    }
-    @case ('resumen') {
-      <p>Total de temas: <strong>{{ topics().length }}</strong></p>
-    }
-  }
-</section>
+
+        <div class="stat-card glass-surface lang-card">
+          <p class="stat-label">Lenguajes más usados</p>
+          <div class="lang-list">
+            @for (lang of languages(); track lang.name) {
+              <div class="lang-row">
+                <div class="lang-head">
+                  <span class="lang-name">{{ lang.name }}</span>
+                  <span class="lang-pct">{{ lang.pct }}%</span>
+                </div>
+                <div class="lang-track">
+                  <div class="lang-fill" [style.width.%]="lang.pct" [style.background]="lang.color"></div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section class="projects-block">
+        <div class="projects-head">
+          <h2 class="projects-title">Proyectos activos</h2>
+          <div class="filter-tabs">
+            @for (filter of filters(); track filter) {
+              <button
+                type="button"
+                class="filter-chip"
+                [class.filter-active]="filter === activeFilter()"
+                (click)="activeFilter.set(filter)"
+              >{{ filter }}</button>
+            }
+          </div>
+        </div>
+
+        <div class="projects-grid">
+          @for (project of filteredProjects(); track project.name) {
+            <article class="project-card glass-surface">
+              <div class="project-card-top">
+                <span class="project-icon">{{ project.icon }}</span>
+                @if (project.tag) {
+                  <span class="project-tag">{{ project.tag }}</span>
+                }
+              </div>
+              <h3 class="project-name">{{ project.name }}</h3>
+              <p class="project-desc">{{ project.description }}</p>
+              <div class="project-meta">
+                <span class="project-lang">
+                  <span class="lang-dot" [style.background]="project.color"></span>
+                  {{ project.language }}
+                </span>
+                <span class="project-stars">★ {{ project.stars }}</span>
+                <span class="project-forks">⑂ {{ project.forks }}</span>
+              </div>
+            </article>
+          }
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="dash-footer">
+        <span>© {{ year() }} Construido por {{ displayName() }}</span>
+        <div class="footer-links">
+          <a [href]="githubUrl()" target="_blank" rel="noopener noreferrer">Código fuente</a>
+          <a href="#">Privacidad</a>
+          <a href="#">Licencia</a>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+</div>

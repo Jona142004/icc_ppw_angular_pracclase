@@ -1,11 +1,11 @@
 import { UpperCasePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
-import { AppFooterComponent } from "../app-footer/app-footer";
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from "@angular/router";
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, UpperCasePipe, RouterLinkActive, AppFooterComponent, RouterOutlet],
+  imports: [RouterLink, UpperCasePipe, RouterLinkActive],
   templateUrl: './app-header.html',
   styleUrl: './app-header.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,4 +27,18 @@ export class AppHeaderComponent {
   toggleInfo(): void {
     this.showInfo.update((valor) => !valor);
   }
+  
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
+  // El signal del servicio: null = no autenticado, User = autenticado.
+  currentUser = this.authService.currentUser;
+
+  logout() {
+    this.authService.logout().subscribe(() => {
+      // Redirige al login despues de cerrar sesion.
+      this.router.navigate(['/login']);
+    });
+  }
+
 }
