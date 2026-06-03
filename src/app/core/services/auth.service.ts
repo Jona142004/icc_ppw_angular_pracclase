@@ -1,6 +1,6 @@
 import { inject, Injectable } from "@angular/core";
 import { toSignal } from "@angular/core/rxjs-interop";
-import { Auth, authState, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "@angular/fire/auth";
+import { Auth, authState, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from "@angular/fire/auth";
 import { from } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
@@ -20,6 +20,11 @@ export class AuthService {
   // Igual que login, se convierte la Promise a Observable.
   register(email: string, password: string) {
     return from(createUserWithEmailAndPassword(this.auth, email, password));
+  }
+
+  loginWithGoogle() {
+    const provider = new GoogleAuthProvider();
+    return from(signInWithPopup(this.auth, provider));
   }
 
   logout() {

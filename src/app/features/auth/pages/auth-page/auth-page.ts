@@ -32,6 +32,18 @@ export class AuthPage {
     this.authForm.reset();
   }
 
+  loginWithGoogle() {
+    this.isLoading.set(true);
+    this.errorMessage.set(null);
+    this.authService.loginWithGoogle().subscribe({
+      next: () => this.router.navigate(['/']),
+      error: () => {
+        this.errorMessage.set('No se pudo iniciar sesion con Google.');
+        this.isLoading.set(false);
+      },
+    });
+  }
+
   onSubmit() {
     if (this.authForm.invalid) return;
 
