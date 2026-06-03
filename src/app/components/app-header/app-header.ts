@@ -31,13 +31,12 @@ export class AppHeaderComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  // El signal del servicio: null = no autenticado, User = autenticado.
-  currentUser = this.authService.currentUser;
+  currentUser = this.authService.user;
+  role = this.authService.role;
 
   logout() {
     this.authService.logout().subscribe(() => {
-      // Redirige al login despues de cerrar sesion.
-      this.router.navigate(['/login']);
+      this.router.navigate(['/auth']);
     });
   }
 

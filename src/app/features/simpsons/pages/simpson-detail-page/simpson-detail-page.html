@@ -57,7 +57,7 @@
       </div>
     </article>
   }
-  @if (authService.currentUser()) {
+  @if (authService.user()) {
     <!-- Solo visible para usuarios autenticados. -->
     <button
       class="btn btn-outline btn-sm"
@@ -79,7 +79,7 @@
     }
   } @else {
     <!-- Invita al usuario anonimo a autenticarse. -->
-    <a class="btn btn-ghost btn-sm" routerLink="/uth">
+    <a class="btn btn-ghost btn-sm" routerLink="/auth">
       Inicia sesion para guardar favoritos
     </a>
   }

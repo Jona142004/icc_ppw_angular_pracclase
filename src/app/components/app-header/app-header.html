@@ -47,9 +47,11 @@
         <li>
           <a routerLink="/ui-components" routerLinkActive="menu-active">Componentes</a>
         </li>
-        <li>
-          <a routerLink="/simpsons" routerLinkActive="menu-active">Simpsons</a>
-        </li>
+        @if (role() === 'admin') {
+          <li>
+            <a routerLink="/simpsons" routerLinkActive="menu-active">Simpsons</a>
+          </li>
+        }
         <li>
           <details>
             <summary>Formularios</summary>
@@ -109,9 +111,11 @@
       <li>
         <a routerLink="/ui-components" routerLinkActive="menu-active">Componentes</a>
       </li>
-      <li>
-        <a routerLink="/simpsons" routerLinkActive="menu-active">Simpsons</a>
-      </li>
+      @if (role() === 'admin') {
+        <li>
+          <a routerLink="/simpsons" routerLinkActive="menu-active">Simpsons</a>
+        </li>
+      }
       <li>
         <details>
           <summary>Formularios</summary>
@@ -126,7 +130,6 @@
               <a routerLink="/project-config" routerLinkActive="menu-active">
                 Configurar Proyecto
               </a>
-              
             </li>
           </ul>
         </details>
